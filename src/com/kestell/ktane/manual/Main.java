@@ -8,7 +8,7 @@ package com.kestell.ktane.manual;
 public class Main {
 
     /**
-     * @param args
+     * @param args is the input stuff
      */
     public static void main(String[] args) {
         // write your code here

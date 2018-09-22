@@ -1,19 +1,13 @@
 package com.kestell.ktane.manual;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Arrays;
-
-import com.kestell.ktane.manual.ComplicatedWires;
 
 /**
  * @notes this class contains the bomb
  *
- * @todo add outer module 'edge work' (batteries)
- * @todo add alerts to all functions
- * @todo figure out the integration pattern between the main function and the modules
- * @todo add needy modules
+ * todo add outer module 'edge work' (batteries)
+ * todo add alerts to all functions
+ * todo figure out the integration pattern between the main function and the modules
+ * todo add needy modules
  */
 public class Bomb {
     /**
@@ -84,11 +78,11 @@ public class Bomb {
     /**
      * @notes this is the wire complicated wires module
      * @notes the official name is On the Subject of Complicated Wires
+     *
+     * todo remove this if it is no long needed
      */
-    public static String complicatedWires(boolean[] a, boolean[] b) {
-        String returnValue = "";
+    public static void complicatedWires() {
 
-        return returnValue;
     }
 
 
@@ -119,14 +113,14 @@ public class Bomb {
      * @input 5 sets of letters
      * @output password that contains the letters that have been input so far
      *
-     * @stretchGoal start with the whole list of words. For every letter input, update the list to the current possibilities. Assume wild until the number of letters that can be in a given spot are entered. Howver, sort the list with the given input at the top.
+     * @stretchGoal start with the whole list of words. For every letter input, update the list to the current possibilities. Assume wild until the number of letters that can be in a given spot are entered. However, sort the list with the given input at the top.
      */
     public static void password(){
 
     }
 
     public static void makeMessage(String input){
-        if(input != null && input != ""){
+        if(input != null && input.equals("")){
             System.out.println("" + input);
         }
         else{
@@ -136,7 +130,7 @@ public class Bomb {
 
 
     /**
-     * Created by philk on 9/9/2018.
+     * Created by phil k on 9/9/2018.
      */
 
 

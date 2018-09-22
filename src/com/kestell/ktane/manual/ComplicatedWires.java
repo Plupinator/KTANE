@@ -1,19 +1,17 @@
 /**
- * Created by philk on 9/15/2018.
+ * Created by phil k on 9/15/2018.
+ * this is for all logic specific to the complicated wires module
  */
 package com.kestell.ktane.manual;
 
 public class ComplicatedWires {
-    public static void makeMessage(String input){
-        if(input != null && input != ""){
+    private static void makeMessage(String input){
+        if(input != null && input.equals("")){
             System.out.println("" + input);
         }
         else{
             System.out.println("testing");
         }
-    }
-    public static void test002(){
-
     }
 
     public static String changed(ComplicatedWireOptions wireState){
@@ -22,12 +20,18 @@ public class ComplicatedWires {
         return returnValue.toOptionString();
     }
 
-    public static String evalCut(ComplicatedCutOptions CutOptions){
-
-        return "";
+    /**
+     *
+     * //@param //ComplicatedCutOptions CutOptions
+     * //@return cut or no cut
+     *
+     * TODO make this return useful stuff
+     */
+    public static void evalCut(){
+        EdgeWork edgeState = new EdgeWork();
     }
 
-    static public Node complicatedWiresTree(){
+    private static Node complicatedWiresTree(){
         Node root = new Node("Star");
 
         Node b1 = new Node("Red");
@@ -78,117 +82,91 @@ public class ComplicatedWires {
         d8.yesCutKey = 'D';
         d8.noCutKey  = 'C';
 
-        if(false){
-            d1.yesCutKey = 'D';
-            d1.noCutKey  = 'S';
-            d2.yesCutKey = 'P';
-            d2.noCutKey  = 'S';
-            d3.yesCutKey = 'B';
-            d3.noCutKey  = 'B';
-            d4.yesCutKey = 'C';
-            d4.noCutKey  = 'S';
-            d5.yesCutKey = 'P';
-            d5.noCutKey  = 'P';
-            d6.yesCutKey = 'D';
-            d6.noCutKey  = 'S';
-            d7.yesCutKey = 'B';
-            d7.noCutKey  = 'D';
-            d8.yesCutKey = 'C';
-            d8.noCutKey  = 'C';
-        }
-
         return root;
     }
 
-    //TODO: get the state of PSDCB
-    //TODO: call ABCD.yes if ABCD.on != false
-    //TODO: call ABCD.no if ABCD.off != false
-    static public ComplicatedCutOptions evalTree(ComplicatedWireOptions wireState){
+
+    private static ComplicatedCutOptions evalTree(ComplicatedWireOptions wireState){
         Node root = complicatedWiresTree();
         ComplicatedCutOptions options = new ComplicatedCutOptions();
         options = traverseTree(wireState, root, options);
         return options;
     }
 
-    static public ComplicatedCutOptions traverseTree(ComplicatedWireOptions wireState, Node root, ComplicatedCutOptions options){
+    private static ComplicatedCutOptions traverseTree(ComplicatedWireOptions wireState, Node root, ComplicatedCutOptions options){
         //makeMessage("   root.value" + root.value);
         //makeMessage("      root.yes" + root.yes.toString());
         //makeMessage("      root.no" + root.no.toString());
         if(root == null){
             return options;
         }
-        if(root.value == "Star") {
-            if(wireState.StarYes){
-                makeMessage(" StarYes");
-                traverseTree(wireState, root.yes, options);
-            }
-            if(wireState.StarNo) {
-                makeMessage(" StarNo");
-                traverseTree(wireState, root.no, options);
-            }
-        }
-        else if(root.value == "Red"){
-            if(wireState.RedYes){
-                makeMessage("  RedYes");
-                traverseTree(wireState, root.yes, options);
-            }
-            if(wireState.RedNo) {
-                makeMessage("  RedNo");
-                traverseTree(wireState, root.no, options);
-            }
-        }
-        else if(root.value == "Blue"){
-            if(wireState.BlueYes){
-                makeMessage("   BlueYes");
-                //makeMessage("n: BlueYes" + root.yes.value);
-                traverseTree(wireState, root.yes, options);
-            }
-            if(wireState.BlueNo) {
-                makeMessage("   BlueNo");
-                //makeMessage("n: BlueNo" + root.no.value);
-                traverseTree(wireState, root.no, options);
-            }
-        }
-        else if(root.value == "Led"){
-            if(wireState.LedOff){
-                makeMessage("    LedOff:  "  + root.noCutKey);
-                //makeMessage("n:       " + root.noCutKey);
-                if(root.noCutKey == 'B'){
-                    options.b = true;
+        switch (root.value) {
+            case "Star":
+                if (wireState.StarYes) {
+                    makeMessage(" StarYes");
+                    traverseTree(wireState, root.yes, options);
                 }
-                else if(root.noCutKey == 'C'){
-                    options.c = true;
+                if (wireState.StarNo) {
+                    makeMessage(" StarNo");
+                    traverseTree(wireState, root.no, options);
                 }
-                else if(root.noCutKey == 'D'){
-                    options.d = true;
+                break;
+            case "Red":
+                if (wireState.RedYes) {
+                    makeMessage("  RedYes");
+                    traverseTree(wireState, root.yes, options);
                 }
-                else if(root.noCutKey == 'P'){
-                    options.p = true;
+                if (wireState.RedNo) {
+                    makeMessage("  RedNo");
+                    traverseTree(wireState, root.no, options);
                 }
-                else if(root.noCutKey == 'S'){
-                    options.s = true;
+                break;
+            case "Blue":
+                if (wireState.BlueYes) {
+                    makeMessage("   BlueYes");
+                    //makeMessage("n: BlueYes" + root.yes.value);
+                    traverseTree(wireState, root.yes, options);
                 }
-            }
-            if(wireState.LedOn){
-                makeMessage("    LedOn:  "  + root.yesCutKey);
-                //makeMessage("y:       " + root.yesCutKey);
-                if(root.yesCutKey == 'B'){
-                    options.b = true;
+                if (wireState.BlueNo) {
+                    makeMessage("   BlueNo");
+                    //makeMessage("n: BlueNo" + root.no.value);
+                    traverseTree(wireState, root.no, options);
                 }
-                else if(root.yesCutKey == 'C'){
-                    options.c = true;
+                break;
+            case "Led":
+                if (wireState.LedOff) {
+                    makeMessage("    LedOff:  " + root.noCutKey);
+                    //makeMessage("n:       " + root.noCutKey);
+                    if (root.noCutKey == 'B') {
+                        options.b = true;
+                    } else if (root.noCutKey == 'C') {
+                        options.c = true;
+                    } else if (root.noCutKey == 'D') {
+                        options.d = true;
+                    } else if (root.noCutKey == 'P') {
+                        options.p = true;
+                    } else if (root.noCutKey == 'S') {
+                        options.s = true;
+                    }
                 }
-                else if(root.yesCutKey == 'D'){
-                    options.d = true;
+                if (wireState.LedOn) {
+                    makeMessage("    LedOn:  " + root.yesCutKey);
+                    //makeMessage("y:       " + root.yesCutKey);
+                    if (root.yesCutKey == 'B') {
+                        options.b = true;
+                    } else if (root.yesCutKey == 'C') {
+                        options.c = true;
+                    } else if (root.yesCutKey == 'D') {
+                        options.d = true;
+                    } else if (root.yesCutKey == 'P') {
+                        options.p = true;
+                    } else if (root.yesCutKey == 'S') {
+                        options.s = true;
+                    }
                 }
-                else if(root.yesCutKey == 'P'){
-                    options.p = true;
-                }
-                else if(root.yesCutKey == 'S'){
-                    options.s = true;
-                }
-            }
-            return options;
+                return options;
+            default:
+                makeMessage("ERROR ----------------------------------------------------------------------------------");
         }
         return options;
     }
@@ -255,7 +233,7 @@ public class ComplicatedWires {
     }
 
     static class Node {
-        String value;
+        final String value;
         Node yes;
         Node no;
         char yesCutKey;

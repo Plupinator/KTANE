@@ -1,12 +1,16 @@
 /**
- * Created by philk on 9/15/2018.
+ * Created by phil k on 9/15/2018.
+ *
  */
 package com.kestell.ktane.manual;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ *
+ * todo figure out how to call forms within the tabs.
+ */
 class BombGUI {
     private JTabbedPane tabbedPane1;
     private JRadioButton LedOn;
@@ -36,16 +40,12 @@ class BombGUI {
     private ButtonGroup LED;
 
     /**
-     * @todo figure out how to link this and the bomb.java
+     * todo figure out how to link this and the bomb.java
      */
     public BombGUI() {
 
 
-        ActionListener complicatedWiresListener = new ActionListener() {
-            public void actionPerformed(ActionEvent actionEvent) {
-                SetComplicatedWireState();
-            }
-        };
+        ActionListener complicatedWiresListener = actionEvent -> SetComplicatedWireState();
         LedOn.addActionListener(complicatedWiresListener);
         LedOff.addActionListener(complicatedWiresListener);
         RedYes.addActionListener(complicatedWiresListener);
@@ -55,22 +55,16 @@ class BombGUI {
         StarYes.addActionListener(complicatedWiresListener);
         StarNo.addActionListener(complicatedWiresListener);
         //StarYes.addActionListener(complicatedWiresListener);
-        ResetComplicateWiresButton.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent actionEvent) {
-            RestComplicatedWireState();}});
+        ResetComplicateWiresButton.addActionListener(actionEvent -> RestComplicatedWireState());
 
-        ActionListener edgeStateListener = new ActionListener() {
-            public void actionPerformed(ActionEvent actionEvent) {
-                SetEdgeState();
-            }
-        };
+        ActionListener edgeStateListener = actionEvent -> SetEdgeState();
         Batteries01.addActionListener(edgeStateListener);
         Batteries2.addActionListener(edgeStateListener);
         evenSerialNumber.addActionListener(edgeStateListener);
         oddSerialNumber.addActionListener(edgeStateListener);
         yesParallelPort.addActionListener(edgeStateListener);
         noParallelPort.addActionListener(edgeStateListener);
-        resetEdgeWorkButton.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent actionEvent) {
-            RestEdgeState();}});
+        resetEdgeWorkButton.addActionListener(actionEvent -> RestEdgeState());
     }
 
     public void SetComplicatedWireState() {

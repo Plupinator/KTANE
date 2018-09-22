@@ -5,7 +5,7 @@ package com.kestell.ktane.manual;
  * @see <a href="https://www.tutorialspoint.com/java/java_using_singleton.htm">Tutorial I used.</a>
  * @see <a href="https://www.tutorialspoint.com/java/java_using_singleton.htm">Tutorial I used.</a>
  *
- * @todo
+ * todo
  */
 public class EdgeWork {
     static class EdgeOptions {
